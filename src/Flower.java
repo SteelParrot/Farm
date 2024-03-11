@@ -19,7 +19,7 @@ public abstract class Flower {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", neededArea=" + neededArea +
-                ", chanceOfGrowth=" + chanceOfGrowth +
+                ", chanceOfGrowth=" + chanceOfGrowth *100+"%"+
                 '}';
     }
 

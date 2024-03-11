@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Farm {
-    private int landSize = 100; // 1 milion metru^2
+    private int landSize = 100; // i dont know what is this for (nothing)
     private final int maxFlowers = 5;
     int smallAnimalCount = 0;
     int bigAnimalCount = 0;
@@ -12,14 +12,21 @@ public class Farm {
     public void addAnimal(Animal animal) throws Exception {
         if (smallAnimalCount <= 10 && bigAnimalCount <= 10){
             barn.add(animal);
-            if (animal.size == Size.SMALL){
-                smallAnimalCount++;
-            }else {
-                bigAnimalCount++;
-            }
+            increaseBarnOccupation(animal.size);
         }else {
             throw new Exception("Animal can not fit");
         }
+    }
+
+    public void sellAnimal(Animal animal) throws Exception {
+        if (barn.contains(animal)){
+            barn.remove(animal);
+            decreaseAnimalOccupation(animal.size);
+        }else {
+            throw new Exception("Can not sell animal that you dont own");
+        }
+
+
     }
 
     public void petAnimal(Animal animal){
@@ -41,6 +48,22 @@ public class Farm {
             if (flower == fl) {
                 fl.chanceOfGrowth += 0.5;
             }
+        }
+    }
+
+    private void increaseBarnOccupation(Size size){
+        if (size == Size.BIG){
+            bigAnimalCount++;
+        }else {
+            smallAnimalCount++;
+        }
+    }
+
+    private void decreaseAnimalOccupation(Size size){
+        if (size == Size.BIG){
+            bigAnimalCount--;
+        }else {
+            smallAnimalCount--;
         }
     }
 }
